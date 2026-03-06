@@ -1,14 +1,13 @@
 import streamlit as st
 import random
 import time
-
 import requests
 import json
 
-# Streamed response emulator
-
 def response_generator():
-    response = ai_ask("Pretend you are a very friendly and helpful person.  Please provide a response given the provided context.  Please provide the response only with no before or after commentary.",
+    response = ai_ask("Pretend you are a very friendly and helpful person.  " +
+                      "Please provide a response given the provided context.  " +
+                      "Please provide the response only with no before or after commentary.",
                       data=st.session_state.messages,
                       api_key=st.secrets["apikey"])
     for word in response.split():
@@ -16,7 +15,7 @@ def response_generator():
         time.sleep(0.05)
 
 def ai_ask(prompt, data=None, temperature=0.5, max_tokens=250, model="mistral-small-latest", api_key=None, api_url="https://api.mistral.ai/v1/chat/completions"):
-if api_key is None or api_url is None:
+    if api_key is None or api_url is None:
         if "idToken" in globals():
             api_key = globals()["idToken"]
             api_url = "https://llm.boardflare.com"
@@ -59,6 +58,7 @@ if api_key is None or api_url is None:
     except Exception as e:
         return f"Error: {str(e)}"
 
+
 st.title("Simple chat")
 
 # Initialize chat history
@@ -84,4 +84,5 @@ with st.chat_message("assistant"):
 
 # Add assistant response to chat history
 st.session_state.messages.append({"role": "assistant", "content": response})
+
 
