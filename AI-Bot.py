@@ -13,7 +13,6 @@ def response_generator():
         time.sleep(0.05)
 
 
-
 st.title("Simple chat")
 
 # Initialize chat history
