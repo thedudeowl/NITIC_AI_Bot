@@ -15,8 +15,6 @@ def response_generator():
         yield word + " "
         time.sleep(0.05)
 
-
-
 def ai_ask(prompt, data=None, temperature=0.5, max_tokens=250, model="mistral-small-latest", api_key=None, api_url="https://api.mistral.ai/v1/chat/completions"):
 if api_key is None or api_url is None:
         if "idToken" in globals():
@@ -61,7 +59,6 @@ if api_key is None or api_url is None:
     except Exception as e:
         return f"Error: {str(e)}"
 
-
 st.title("Simple chat")
 
 # Initialize chat history
@@ -80,7 +77,6 @@ if prompt := st.chat_input("What is up?"):
         st.markdown(prompt)
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
-
 
 # Display assistant response in chat message container
 with st.chat_message("assistant"):
